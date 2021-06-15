@@ -1,0 +1,50 @@
+name: npm-audit
+
+on:
+  pull_request:
+    paths:
+      - "**package.json"
+      - "**package-lock.json"
+  push:
+    branches: [main]
+    paths:
+      - "**package.json"
+      - "**package-lock.json"
+
+env:
+  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL_CICD }}
+
+jobs:
+  root:
+    name: root
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: npm ci
+      - uses: oke-py/npm-audit-action@v1.7.1
+        with:
+          audit_level: high
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_labels: vulnerability
+          dedupe_issues: true
+          production_flag: true
+
+  services-demo:
+    name: services-demo
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./services/demo
+    steps:
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: npm ci
+      - uses: oke-py/npm-audit-action@v1.7.1
+        with:
+          audit_level: high
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          issue_labels: vulnerability
+          dedupe_issues: true
+          working_directory: ./services/demo
+          production_flag: true

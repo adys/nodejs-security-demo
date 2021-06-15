@@ -1,0 +1,27 @@
+service: demo
+
+plugins:
+  - serverless-bundle
+
+package:
+  individually: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: eu-central-1
+  lambdaHashingVersion: "20201221"
+  apiGateway:
+    shouldStartNameWithService: true
+
+  environment:
+    appDebug: true
+
+functions:
+  list:
+    handler: list.main
+    events:
+      - http:
+          path: /
+          method: get
