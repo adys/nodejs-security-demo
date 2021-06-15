@@ -24,11 +24,10 @@ jobs:
         run: npm ci
       - uses: oke-py/npm-audit-action@v1.7.1
         with:
-          audit_level: moderate
+          audit_level: high
           github_token: ${{ secrets.GITHUB_TOKEN }}
           issue_labels: vulnerability
           dedupe_issues: true
-          production_flag: true
 
   services-demo:
     name: services-demo
@@ -42,9 +41,8 @@ jobs:
         run: npm ci
       - uses: oke-py/npm-audit-action@v1.7.1
         with:
-          audit_level: moderate
+          audit_level: high
           github_token: ${{ secrets.GITHUB_TOKEN }}
           issue_labels: vulnerability
           dedupe_issues: true
           working_directory: ./services/demo
-          production_flag: true
