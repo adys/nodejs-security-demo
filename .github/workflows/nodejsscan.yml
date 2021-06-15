@@ -6,9 +6,9 @@ on:
     branches: [master]
 
 jobs:
-  njsscan:
+  nodejsscan:
     runs-on: ubuntu-latest
-    name: njssnodejsscancan check
+    name: nodejsscan check
     steps:
     - name: Checkout the code
       uses: actions/checkout@v2
