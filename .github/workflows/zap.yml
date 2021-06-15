@@ -1,16 +1,15 @@
 name: zap
 
 on:
-  pull_request:
   push:
     branches: [master]
 
 jobs:
   zap:
     runs-on: ubuntu-latest
-    name: njssnodejsscancan check
+    name: zap scan
     steps:
-      - name: ZAP Scan
+      - name: zap Scan
         uses: zaproxy/action-baseline@v0.4.0
         with:
           target: 'https://6n5m8z8ni9.execute-api.eu-central-1.amazonaws.com/dev'
